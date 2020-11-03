@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke android:color="@color/primaryColor" android:width="@dimen/drawable_background_genre"/>
+    <corners android:radius="@dimen/drawable_background_corner_radius"/>
+</shape>

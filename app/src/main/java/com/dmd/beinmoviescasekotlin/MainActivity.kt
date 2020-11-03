@@ -2,7 +2,7 @@ package com.dmd.beinmoviescasekotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.dmd.beinmoviescasekotlin.ui.main.MainFragment
+import com.dmd.beinmoviescasekotlin.view.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
