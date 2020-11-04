@@ -14,8 +14,6 @@ class MoviesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_movies, parent, false)) {
     private var mMovieHeader: TextView? = null
     private var mMoviePoster: ImageView? = null
-    //TODO: Companion object ile poster path ayarla
-    //TODO: firebase entegrasyonu yap
 
     init {
         mMovieHeader = itemView.findViewById(R.id.txtMoviesHeader)

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "310352022430",
+    "firebase_url": "https://beinmoviecasekotlin.firebaseio.com",
+    "project_id": "beinmoviecasekotlin",
+    "storage_bucket": "beinmoviecasekotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310352022430:android:31676557eecfd5b764a48f",
+        "android_client_info": {
+          "package_name": "com.dmd.beinmoviescasekotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310352022430-9kqvduocncrtd3p01m9kvgpgj8qlidh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1HSH5HyNBYTgZ98rMNSlNlB3purQMwnE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310352022430-9kqvduocncrtd3p01m9kvgpgj8qlidh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
