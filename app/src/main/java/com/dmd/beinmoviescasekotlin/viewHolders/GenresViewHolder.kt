@@ -11,19 +11,22 @@ import com.dmd.beinmoviescasekotlin.model.Genres
 class GenresViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_genres, parent, false)) {
     private var mGenreHeader: TextView? = null
-    //private var mImageView: ImageView? = null
 
     init {
+        /*Constructor içinde res > layout > item_genres içerisindeki .xml'den  türetildikten sonra
+        * içerisindeki componentlere erişim ve yerel private componentleri eşitmelek için, bind methodunda
+        * bunlara veri atanıcak*/
         mGenreHeader = itemView.findViewById(R.id.itemGenreHeader)
     }
 
+    /* view holder'ın bind methodu çağrıldığında gelen objenin constructor içinde find'lanmış olan
+    * yerel değişkenin .text gibi özelliklerine erişim & değerine müdahele*/
     fun bind(genres: Genres) {
         mGenreHeader?.text = genres.name
 
         itemView.setOnClickListener {
             Log.i("BINDTHATITEM", "bind:  ${genres.id} ${genres.name}")
         }
-        //Picasso.get().load(news.imageUrl).into(mImageView)
     }
 
 }

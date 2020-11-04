@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Tüm kullandığım height/width gibi property'leri globalization için dimen.xml içerisinde topladım-->
     <dimen name="drawable_background_genre">2dp</dimen>
     <dimen name="drawable_background_corner_radius">15dp</dimen>
     <dimen name="genre_margin_top">5dp</dimen>
     <dimen name="genre_margin_bottom">5dp</dimen>
     <dimen name="genre_margin_start">2.5dp</dimen>
     <dimen name="genre_margin_end">2.5dp</dimen>
+    <dimen name="movie_margin_start">25dp</dimen>
+    <dimen name="movie_margin_end">25dp</dimen>
+    <dimen name="constraint_zero_dp">0dp</dimen>
 </resources>

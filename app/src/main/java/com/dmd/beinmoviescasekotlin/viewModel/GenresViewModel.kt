@@ -1,29 +1,20 @@
 package com.dmd.beinmoviescasekotlin.viewModel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.dmd.beinmoviescasekotlin.api.Service
-import com.dmd.beinmoviescasekotlin.model.Genres
 import com.dmd.beinmoviescasekotlin.model.GenresResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class GenresViewModel : ViewModel() {
-    private val dataApiService = Service()
-    private val disposable = CompositeDisposable()
+class GenresViewModel : MainViewModel() {
+    //Fragment içerisinde api call'un yapılması sağlıklı olmadığından viewModel içerisinde yaptım
 
-    val genres = MutableLiveData<List<Genres>>()
-    val genresError = MutableLiveData<Boolean>()
-    val genresLoading = MutableLiveData<Boolean>()
-
-    fun refreshData(){
+    //İki viewModel'imi de  kendi oluşturduğum viewModel'den türettim
+    override fun refreshData(){
         getDataFromApiForGenres()
     }
 
     private fun getDataFromApiForGenres(){
-        genresLoading.value= true
+        loading.value= true
 
         disposable.add(
             dataApiService.getDataGenres()
@@ -31,15 +22,15 @@ class GenresViewModel : ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<GenresResponse>(){
                     override fun onSuccess(t: GenresResponse) {
-                        genres.value = t.genres
-                        genresError.value=false
-                        genresLoading.value=false
+                        data.value = t.genres
+                        error.value=false
+                        loading.value=false
 
                     }
 
                     override fun onError(e: Throwable) {
-                        genresLoading.value=false
-                        genresError.value=true
+                        loading.value=false
+                        error.value=true
                         e.printStackTrace()
 
                     }

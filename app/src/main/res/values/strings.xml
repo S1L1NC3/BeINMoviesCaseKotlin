@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">BeINMoviesCaseKotlin</string>
+    <!--Localization'a uygun olduğunu göstermek için ikinci dili ekledim-->
+    <string name="app_name" translatable="false">BeINMoviesCaseKotlin</string>
+    <string name="content_description">Content Description</string>
 </resources>

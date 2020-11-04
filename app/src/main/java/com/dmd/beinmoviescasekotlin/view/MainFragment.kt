@@ -66,6 +66,7 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
     }
 
+    /*MVVM standartlarına göre live data'yı Genres için izleniceği kısım*/
     private fun observeLiveDataForGenres(){
         genresViewModel.genres.observe(this, Observer { data ->
             data?.let {
@@ -86,6 +87,8 @@ class MainFragment : Fragment() {
         })
     }
 
+    /*Movies ve Genresi ayırdığım kısım çünkü kod debug edilip incelenirken kod parçacığını incelemenin
+    * daha mantıklı olucağını ve zamandan tasarruf ediliceğini düşündüm*/
     private fun observeLiveDataForMovies(){
         moviesViewModel.movies.observe(this, Observer { data ->
             data?.let {

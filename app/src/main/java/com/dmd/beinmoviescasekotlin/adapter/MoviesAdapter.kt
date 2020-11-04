@@ -8,6 +8,8 @@ import com.dmd.beinmoviescasekotlin.viewHolders.MoviesViewHolder
 
 class MoviesAdapter(private val moviesList: ArrayList<Movie>): RecyclerView.Adapter<MoviesViewHolder>() {
 
+    //GenresAdapter içerisinde açıkladım bire bir aynısını yazmak istemedim
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return MoviesViewHolder(inflater, parent)
