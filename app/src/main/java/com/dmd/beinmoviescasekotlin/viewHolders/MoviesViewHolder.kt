@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.dmd.beinmoviescasekotlin.MainActivity
 import com.dmd.beinmoviescasekotlin.R
 import com.dmd.beinmoviescasekotlin.model.Movie
 import com.squareup.picasso.Picasso
@@ -23,7 +24,7 @@ class MoviesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind(movie: Movie) {
         mMovieHeader?.text = movie.title
-        Picasso.get().load("http://image.tmdb.org/t/p/w185/${movie.poster_path}").into(mMoviePoster)
+        Picasso.get().load(MainActivity.returnImagePath()+ movie.poster_path).into(mMoviePoster)
     }
 
 }

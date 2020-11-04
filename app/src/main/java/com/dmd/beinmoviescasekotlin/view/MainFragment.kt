@@ -37,18 +37,12 @@ class MainFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         moviesViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
             .get(MoviesViewModel::class.java)
         moviesViewModel.refreshData()
 
         moviesRecylerView.layoutManager = GridLayoutManager(activity!!.applicationContext,2)
         moviesRecylerView.adapter = moviesAdapter
-
-
-
-
-
 
 
         genresViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())
