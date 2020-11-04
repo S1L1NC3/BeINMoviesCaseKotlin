@@ -8,11 +8,12 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class Service {
-    private val BASE_URL = "https://api.themoviedb.org/3/"
+    //Lint sorgusu sonrası özellikle değişken isimlerini değiştirdim BASE_URL'den
+    private val dest = "https://api.themoviedb.org/3/"
 
     //Retrofit için gerekli build işleminin yapılıp API interface'i üzerinden oluşturulduğu kod
     private val api = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(dest)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()

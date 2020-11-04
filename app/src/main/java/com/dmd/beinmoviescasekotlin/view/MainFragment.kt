@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dmd.beinmoviescasekotlin.R
 import com.dmd.beinmoviescasekotlin.adapter.GenresAdapter
 import com.dmd.beinmoviescasekotlin.adapter.MoviesAdapter
+import com.dmd.beinmoviescasekotlin.model.Genres
+import com.dmd.beinmoviescasekotlin.model.Movie
 import com.dmd.beinmoviescasekotlin.viewModel.GenresViewModel
 import com.dmd.beinmoviescasekotlin.viewModel.MoviesViewModel
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -64,19 +66,19 @@ class MainFragment : Fragment() {
 
     /*MVVM standartlarına göre live data'yı Genres için izleniceği kısım*/
     private fun observeLiveDataForGenres(){
-        genresViewModel.genres.observe(this, Observer { data ->
+        genresViewModel.data.observe(this, Observer { data ->
             data?.let {
                 genresRecyclerView.visibility = View.VISIBLE
-                genresAdapter.updateGenresList(data)
+                genresAdapter.updateGenresList(data as List<Genres>)
             }
         })
-        genresViewModel.genresError.observe(this, Observer { error ->
+        genresViewModel.error.observe(this, Observer { error ->
             error?.let {
                 print("deneme")
             }
         })
 
-        genresViewModel.genresLoading.observe(this, Observer { loading ->
+        genresViewModel.loading.observe(this, Observer { loading ->
             loading?.let {
                 print("deneme")
             }
@@ -86,19 +88,19 @@ class MainFragment : Fragment() {
     /*Movies ve Genresi ayırdığım kısım çünkü kod debug edilip incelenirken kod parçacığını incelemenin
     * daha mantıklı olucağını ve zamandan tasarruf ediliceğini düşündüm*/
     private fun observeLiveDataForMovies(){
-        moviesViewModel.movies.observe(this, Observer { data ->
+        moviesViewModel.data.observe(this, Observer { data ->
             data?.let {
                 moviesRecylerView.visibility = View.VISIBLE
-                moviesAdapter.updateMoviesList(data)
+                moviesAdapter.updateMoviesList(data as List<Movie>)
             }
         })
-        moviesViewModel.moviesError.observe(this, Observer { error ->
+        moviesViewModel.error.observe(this, Observer { error ->
             error?.let {
 
             }
         })
 
-        moviesViewModel.moviesLoading.observe(this, Observer { loading ->
+        moviesViewModel.loading.observe(this, Observer { loading ->
             loading?.let {
 
             }
@@ -108,11 +110,10 @@ class MainFragment : Fragment() {
 
     override fun onStart() {
 
+        //SwipeRefreshLayout mantığında yaptım böylece daha güncel gesture'lara yakın bir uygulama olucak
         swipeRefreshLayout.setOnRefreshListener {
             genresRecyclerView.visibility=View.GONE
             moviesRecylerView.visibility=View.GONE
-            //dataError.visibility=View.GONE
-            //dataLoading.visibility=View.VISIBLE
             genresViewModel.refreshData()
             moviesViewModel.refreshData()
             swipeRefreshLayout.isRefreshing=false

@@ -10,22 +10,19 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class GenresViewModel : ViewModel() {
+class GenresViewModel : MainViewModel() {
     //Fragment içerisinde api call'un yapılması sağlıklı olmadığından viewModel içerisinde yaptım
 
-    private val dataApiService = Service()
-    private val disposable = CompositeDisposable()
+    //MainViewModel adında kendi class'ımı oluşturdum böylece dataApiService ve disposable
+    //oluşturup spagetti code yapmadım
 
-    val genres = MutableLiveData<List<Genres>>()
-    val genresError = MutableLiveData<Boolean>()
-    val genresLoading = MutableLiveData<Boolean>()
-
-    fun refreshData(){
+    //Kendi yarattığım sınıftaki method'u override ettim
+    override fun refreshData(){
         getDataFromApiForGenres()
     }
 
     private fun getDataFromApiForGenres(){
-        genresLoading.value= true
+        loading.value= true
 
         disposable.add(
             dataApiService.getDataGenres()
@@ -33,15 +30,15 @@ class GenresViewModel : ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<GenresResponse>(){
                     override fun onSuccess(t: GenresResponse) {
-                        genres.value = t.genres
-                        genresError.value=false
-                        genresLoading.value=false
+                        data.value = t.genres
+                        error.value=false
+                        loading.value=false
 
                     }
 
                     override fun onError(e: Throwable) {
-                        genresLoading.value=false
-                        genresError.value=true
+                        loading.value=false
+                        error.value=true
                         e.printStackTrace()
 
                     }
