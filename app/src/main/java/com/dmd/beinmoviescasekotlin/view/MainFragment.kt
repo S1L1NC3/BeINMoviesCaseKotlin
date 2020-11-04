@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dmd.beinmoviescasekotlin.R
 import com.dmd.beinmoviescasekotlin.adapter.GenresAdapter
@@ -39,7 +40,7 @@ class MainFragment : Fragment() {
             .get(MoviesViewModel::class.java)
         moviesViewModel.refreshData()
 
-        moviesRecylerView.layoutManager = LinearLayoutManager(activity!!.applicationContext)
+        moviesRecylerView.layoutManager = GridLayoutManager(activity!!.applicationContext,2)
         moviesRecylerView.adapter = moviesAdapter
 
 
@@ -61,28 +62,23 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
     /*MVVM standartlarına göre live data'yı Genres için izleniceği kısım*/
     private fun observeLiveDataForGenres(){
         genresViewModel.genres.observe(this, Observer { data ->
             data?.let {
-                moviesRecylerView.visibility = View.VISIBLE
+                genresRecyclerView.visibility = View.VISIBLE
                 genresAdapter.updateGenresList(data)
             }
         })
         genresViewModel.genresError.observe(this, Observer { error ->
             error?.let {
-
+                print("deneme")
             }
         })
 
         genresViewModel.genresLoading.observe(this, Observer { loading ->
             loading?.let {
-
+                print("deneme")
             }
         })
     }
@@ -108,5 +104,20 @@ class MainFragment : Fragment() {
             }
         })
 
+    }
+
+    override fun onStart() {
+
+        swipeRefreshLayout.setOnRefreshListener {
+            genresRecyclerView.visibility=View.GONE
+            moviesRecylerView.visibility=View.GONE
+            //dataError.visibility=View.GONE
+            //dataLoading.visibility=View.VISIBLE
+            genresViewModel.refreshData()
+            moviesViewModel.refreshData()
+            swipeRefreshLayout.isRefreshing=false
+        }
+
+        super.onStart()
     }
 }

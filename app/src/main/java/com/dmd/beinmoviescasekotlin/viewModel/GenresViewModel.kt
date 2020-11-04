@@ -1,20 +1,31 @@
 package com.dmd.beinmoviescasekotlin.viewModel
 
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.dmd.beinmoviescasekotlin.api.Service
+import com.dmd.beinmoviescasekotlin.model.Genres
 import com.dmd.beinmoviescasekotlin.model.GenresResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class GenresViewModel : MainViewModel() {
+class GenresViewModel : ViewModel() {
     //Fragment içerisinde api call'un yapılması sağlıklı olmadığından viewModel içerisinde yaptım
 
-    //İki viewModel'imi de  kendi oluşturduğum viewModel'den türettim
-    override fun refreshData(){
+    private val dataApiService = Service()
+    private val disposable = CompositeDisposable()
+
+    val genres = MutableLiveData<List<Genres>>()
+    val genresError = MutableLiveData<Boolean>()
+    val genresLoading = MutableLiveData<Boolean>()
+
+    fun refreshData(){
         getDataFromApiForGenres()
     }
 
     private fun getDataFromApiForGenres(){
-        loading.value= true
+        genresLoading.value= true
 
         disposable.add(
             dataApiService.getDataGenres()
@@ -22,15 +33,15 @@ class GenresViewModel : MainViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<GenresResponse>(){
                     override fun onSuccess(t: GenresResponse) {
-                        data.value = t.genres
-                        error.value=false
-                        loading.value=false
+                        genres.value = t.genres
+                        genresError.value=false
+                        genresLoading.value=false
 
                     }
 
                     override fun onError(e: Throwable) {
-                        loading.value=false
-                        error.value=true
+                        genresLoading.value=false
+                        genresError.value=true
                         e.printStackTrace()
 
                     }
